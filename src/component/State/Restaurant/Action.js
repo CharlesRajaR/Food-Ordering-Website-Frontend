@@ -52,7 +52,7 @@ export const getRestaurantByUserId = (jwt) =>{
                 }
             })
             dispatch({type:GET_RESTAURANT_BY_USER_ID_SUCCESS,payload:data})
-            console.log(data);
+            console.log("get restaurant by user id success",data);
         }
         catch(error){
             dispatch({type:GET_RESTAURANT_BY_USER_ID_FAILURE,payload:error})
@@ -72,7 +72,7 @@ export const createRestaurant = (reqData) =>{
                 }
             })
             dispatch({type:CREATE_RESTAURANT_SUCCESS,payload:data})
-            console.log(data);
+            console.log("created restaurant",data);
         }
         catch(error){
             dispatch({type:CREATE_CATEGORY_FAILURE,payload:error})
@@ -132,7 +132,7 @@ export const updateRestaurantStatus = ({restaurantId,jwt}) =>{
                 }
             })
             dispatch({type:UPDATE_RESTAURANT_STATUS_SUCCESS, payload:response.data})
-            console.log(response.data);
+            console.log("restaurant status updated",response.data);
         }
         catch(error){
             dispatch({type:UPDATE_RESTAURANT_STATUS_FAILURE,payload:error})
@@ -232,7 +232,7 @@ export const createCategoryAction = ({reqData, jwt}) =>{
                 }
             })
             dispatch({type:CREATE_CATEGORY_SUCCESS,payload:response.data})
-            console.log(response.data);
+            console.log("food category is created",response.data);
         }
         catch(error){
             dispatch({type:CREATE_CATEGORY_FAILURE,payload:error})

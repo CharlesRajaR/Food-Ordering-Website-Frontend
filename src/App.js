@@ -5,7 +5,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material'
 import { darkTheme } from './Theme/DarkTheme'
 // import RestaurantDetails from './component/Restaurant/RestaurantDetails';
 // import Cart from './component/Cart/Cart';
-import CustomerRouter from './CustomerRouter';
+import Router from './Router/Router';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from './component/State/Authentication/Action';
@@ -19,14 +19,14 @@ function App() {
     dispatch(getUser(auth.jwt || jwt));
     dispatch(findCart(auth.jwt || jwt));
     console.log("user and find cart success",auth.user)
-  }, [auth.jwt]);
+  }, [auth.jwt || jwt]);
   
   
   
   return (
     <ThemeProvider theme={darkTheme}>
      <CssBaseline/>
-     <CustomerRouter/>
+     <Router/>
     </ThemeProvider>
   );
 }
