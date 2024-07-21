@@ -1,11 +1,25 @@
 import { Box, Button, Chip, CircularProgress, FormControl, Grid, IconButton, InputLabel, MenuItem, OutlinedInput, Select, TextField } from '@mui/material';
 import { useFormik } from 'formik'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import Close from '@mui/icons-material/Close';
 import { uploadImageToCloudinary } from '../util/uploadImageToCloudinary';
+import { useDispatch, useSelector } from 'react-redux';
+import { getIngredientsOfRestaurant } from '../../component/State/Ingredients/Action';
+import { createMenuItem } from '../../component/State/Menu/Action';
+import { getRestaurantCategory } from '../../component/State/Restaurant/Action';
 
 const CreateMenuForm = () => {
+  const { restaurant, menu } = useSelector(store => store)
+  const id = restaurant.userRestaurants?.id
+  const jwt = localStorage.getItem("jwt")
+  const dispatch = useDispatch()
+  useEffect(() =>{
+    dispatch(getIngredientsOfRestaurant({id:id, jwt:jwt}))
+    dispatch(getRestaurantCategory({jwt,restaurantId:id}))
+    console.log("createmenuform",restaurant)
+  },[])
+  const { ingredients } = useSelector(store => store)
   const [uploadImage, setUploadImage] = useState();
   const initialValues = {
     name:"",
@@ -21,9 +35,10 @@ const CreateMenuForm = () => {
   const formik = useFormik({
     initialValues,
     onSubmit:(values)=>{
-      values.restaurantId=3;
+      // values.restaurantId=3;
       console.log("values",values)
-      
+      dispatch(createMenuItem({menu:values, jwt:jwt}))
+      console.log("created menu form =>",menu)    
     }
   });
 
@@ -116,19 +131,19 @@ const CreateMenuForm = () => {
           renderValue={(selected) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
               {selected.map((value) => (
-                <Chip key={value} label={value} />
+                <Chip key={value.name} label={value.name} />
               ))}
             </Box>
           )}
           // MenuProps={MenuProps}
         >
-          {["bread","souce","omeleete"].map((name,index) => (
+          {ingredients.ingredients?.map((item,index) => (
             <MenuItem
               key={index}
-              value={name}
+              value={item}
            
             >
-              {name}
+              {item.name}
             </MenuItem>
           ))}
         </Select>
@@ -157,9 +172,14 @@ const CreateMenuForm = () => {
     onChange={formik.handleChange}
     name='category'
   >
-    <MenuItem value={10}>Ten</MenuItem>
-    <MenuItem value={20}>Twenty</MenuItem>
-    <MenuItem value={30}>Thirty</MenuItem>
+    {
+      restaurant.category?.map((item) =>{
+        return(
+              <MenuItem value={item}>{item.name}</MenuItem>
+        )
+      })
+    }
+
   </Select>
 </FormControl>
           </Grid>
@@ -187,8 +207,8 @@ const CreateMenuForm = () => {
     name='vegetarian'
     onChange={formik.handleChange}
   >
-    <MenuItem value={"true"}>yes</MenuItem>
-    <MenuItem value={"false"}>No</MenuItem>
+    <MenuItem value={true}>yes</MenuItem>
+    <MenuItem value={false}>No</MenuItem>
  
   </Select>
 </FormControl>

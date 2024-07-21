@@ -226,7 +226,7 @@ export const createCategoryAction = ({reqData, jwt}) =>{
         dispatch({type:CREATE_CATEGORY_REQUEST})
 
         try{
-            const response = await api.post(`api/admin/category`,reqData,{
+            const response = await api.post(`api/admin/category/${reqData.restaurantId}`,reqData,{
                 headers:{
                     Authorization:`Bearer ${jwt}`
                 }

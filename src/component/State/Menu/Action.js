@@ -1,5 +1,10 @@
 import { api } from '../../config/api'
-import { CREATE_MENU_ITEM_FAILURE, CREATE_MENU_ITEM_REQUEST, CREATE_MENU_ITEM_SUCCESS, DELETE_MENU_ITEM_FAILURE, DELETE_MENU_ITEM_REQUEST, DELETE_MENU_ITEM_SUCCESS, GET_MENU_ITEM_BY_RESTAURANT_ID_FAILURE, GET_MENU_ITEM_BY_RESTAURANT_ID_REQUEST, GET_MENU_ITEM_BY_RESTAURANT_ID_SUCCESS, SEARCH_MENU_ITEM_FAILURE, SEARCH_MENU_ITEM_REQUEST, SEARCH_MENU_ITEM_SUCCESS, UPDATE_MENU_ITEM_AVILABILITY_FAILURE, UPDATE_MENU_ITEM_AVILABILITY_REQUEST, UPDATE_MENU_ITEM_AVILABILITY_SUCCESS } from "./ActionTypes";
+import { CREATE_MENU_ITEM_FAILURE, CREATE_MENU_ITEM_REQUEST, CREATE_MENU_ITEM_SUCCESS,
+DELETE_MENU_ITEM_FAILURE, DELETE_MENU_ITEM_REQUEST, DELETE_MENU_ITEM_SUCCESS,
+GET_MENU_ITEM_BY_RESTAURANT_ID_FAILURE, GET_MENU_ITEM_BY_RESTAURANT_ID_REQUEST,
+GET_MENU_ITEM_BY_RESTAURANT_ID_SUCCESS, SEARCH_MENU_ITEM_FAILURE, SEARCH_MENU_ITEM_REQUEST,
+SEARCH_MENU_ITEM_SUCCESS, UPDATE_MENU_ITEM_AVILABILITY_FAILURE,UPDATE_MENU_ITEM_AVILABILITY_REQUEST,
+UPDATE_MENU_ITEM_AVILABILITY_SUCCESS } from "./ActionTypes";
 
 export const createMenuItem = ({menu, jwt}) => {
     return async(dispatch) =>{
@@ -11,14 +16,13 @@ export const createMenuItem = ({menu, jwt}) => {
            }
            });
           dispatch({type:CREATE_MENU_ITEM_SUCCESS, payload:data})
-          console.log("data",data)
+          console.log("menu item created successfully",data)
         }
         catch(error){
             dispatch({type:CREATE_MENU_ITEM_FAILURE, payload:error})
             console.log("error", error);
         }
-    }
-    
+      }
 }
 
 export const getMenuItemByRestaurantId = (reqData) => {
@@ -34,7 +38,7 @@ export const getMenuItemByRestaurantId = (reqData) => {
            }
            });
           dispatch({type:GET_MENU_ITEM_BY_RESTAURANT_ID_SUCCESS, payload:response.data})
-          console.log("response data",response.data)
+          console.log("get menu item by restaurant id success",response.data)
         }
         catch(error){
             dispatch({type:GET_MENU_ITEM_BY_RESTAURANT_ID_FAILURE, payload:error})
@@ -53,8 +57,8 @@ export const updateMenuItemAvailability = ({foodId, jwt}) => {
             Authorization:`Bearer ${jwt}`
            }
            });
-          dispatch({type:UPDATE_MENU_ITEM_AVILABILITY_SUCCESS, payload:data})
-          console.log("data",data)
+          // dispatch({type:UPDATE_MENU_ITEM_AVILABILITY_SUCCESS, payload:data})
+          console.log("menu item updated",data)
         }
         catch(error){
             dispatch({type:UPDATE_MENU_ITEM_AVILABILITY_FAILURE, payload:error})
@@ -88,13 +92,13 @@ export const deleteFoodAction = ({foodId, jwt}) => {
     return async(dispatch) =>{
         dispatch({type:DELETE_MENU_ITEM_REQUEST})
         try{
-          const { data } = api.delete(`api/admin/food/${foodId}`, {
+          const response = api.delete(`api/admin/food/${foodId}`, {
           headers:{
             Authorization:`Bearer ${jwt}`
            }
            });
-          dispatch({type:DELETE_MENU_ITEM_SUCCESS, payload:data})
-          console.log("data",data)
+          dispatch({type:DELETE_MENU_ITEM_SUCCESS, payload:foodId})
+          console.log("food deleted successfully",response)
         }
         catch(error){
             dispatch({type:DELETE_MENU_ITEM_FAILURE, payload:error})

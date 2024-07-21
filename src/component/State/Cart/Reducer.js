@@ -29,7 +29,10 @@ const cartReducer = ( state = initialState, action) => {
             return{
                 ...state,error:null, loading:false, cart:action.payload, cartItems:action.payload.items
             }
-
+        case actionTypes.GET_ALL_CART_ITEM_SUCCESS:
+            return{
+                ...state,error:null, loading:false, cartItems:action.payload
+                }
         case actionTypes.ADD_ITEM_TO_CART_SUCCESS:
             return{
                 ...state, error:null, loading:false, cartItems:[action.payload,...state.cartItems]
@@ -55,7 +58,9 @@ const cartReducer = ( state = initialState, action) => {
                 ...state, cartItems:[],cart:null
             }
         default:
-            return initialState;
+            return{
+                ...state
+            };
     }
 }
 

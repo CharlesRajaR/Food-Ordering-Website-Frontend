@@ -11,13 +11,13 @@ import { getMenuItemByRestaurantId } from '../State/Menu/Action'
 
 const RestaurantDetails = () => {
     const foodTypes = [
-    {label:"All" , value:"All"},
-    {label:"Vegetarian" , value:"Vegetarian"},
-    {label:"Non-Vegetarian" , value:"Non-Vegetarian"},
-    {label:"Seasonal" , value:"Seasonal"}
+    {id:1, label:"All" , value:"All"},
+    {id:2, label:"Vegetarian" , value:"Vegetarian"},
+    {id:3, label:"Non-Vegetarian" , value:"Non-Vegetarian"},
+    {id:4, label:"Seasonal" , value:"Seasonal"}
 ]
     const [selectedCategory, setSelectedCategory] = useState(""); 
-    const { auth, restaurant, menu } = useSelector(store => store)
+    const { auth } = useSelector(store => store)
     const[foodType, setFoodType] = useState("All");
     const {id} = useParams();
     const jwt = localStorage.getItem("jwt"); 
@@ -33,9 +33,14 @@ const RestaurantDetails = () => {
     useEffect(() =>{
        dispatch(getRestaurantById({jwt, restaurantId:id}))
        dispatch(getRestaurantCategory({jwt, restaurantId:id}))
-      dispatch(getMenuItemByRestaurantId(reqData))
-    },[selectedCategory,foodType])
+  
+    },[])
 
+    useEffect(() =>{
+           dispatch(getMenuItemByRestaurantId(reqData))
+    },[selectedCategory,foodType])
+    
+    const { restaurant, menu } = useSelector(store => store)
     // useEffect(() =>{
     //     //  dispatch(getRestaurantCategory({jwt, restaurantId:id}))
     //      dispatch(getMenuItemByRestaurantId(reqData))
@@ -54,10 +59,10 @@ const RestaurantDetails = () => {
   
     const handleFilterCategory = (e, value) => {
       setSelectedCategory(value)
-      console.log(e.target.value, e.target.name, value)
+      console.log("selected category changed", value)
     }
     const handleFilter = (e) => {
-        console.log(e.target.value, e.target.name)
+        console.log("seleted food type changed",e.target.value)
         setFoodType(e.target.value)
     }
   return (
@@ -108,7 +113,10 @@ const RestaurantDetails = () => {
             </Typography>
             <FormControl className='py-10 space-y-5' component={"fieldSet"}>
                 <RadioGroup name = "food-type" value={foodType} onChange={handleFilter}>
-                    {foodTypes.map((item) => <FormControlLabel key={item.value} value={item.name} control={<Radio/>} label={item.name}/>)}
+                  {
+                    foodTypes.map((item) =>
+                     <FormControlLabel key={item.id} value={item.value} control={<Radio/>} label={item.label}/>)
+                  }
                 </RadioGroup>
             </FormControl>
          </div>
@@ -119,7 +127,9 @@ const RestaurantDetails = () => {
             </Typography>
             <FormControl className='py-10 space-y-5' component={"fieldSet"}>
                 <RadioGroup name="foodCategory" onChange={handleFilterCategory} value={selectedCategory}>
-                    {restaurant.category?.map((item) => <FormControlLabel key={item.id} value={item.name} control={<Radio/>} label={item.name}/>)}
+                    {restaurant.category?.map((item) => 
+
+                    <FormControlLabel key={item.id} value={item.name} control={<Radio/>} label={item.name}/>)}
                 </RadioGroup>
             </FormControl>
          </div>

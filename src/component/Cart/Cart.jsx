@@ -9,7 +9,7 @@ import Modal from '@mui/material/Modal';
  import { Field, Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux'
 import { createOrder } from '../State/Order/Action'
-import { findCart } from '../State/Cart/Action'
+import { findCart, getAllCartItems } from '../State/Cart/Action'
 
 const initialValues = {
     State:"",
@@ -31,29 +31,32 @@ const initialValues = {
 };
 
 const Cart = () => {
-  const { cart, auth } = useSelector(store => store);
+  const {  auth, cart } = useSelector(store => store);
   const jwt = localStorage.getItem("jwt")
   const dispatch = useDispatch()
-  console.log("cart.jsx cartitems",cart.cartItems)
+    console.log("cart.jsx cartitems",cart)
   const handleSubmit = (value) => {
     console.log(value)
-    const data = {
-      jwt:localStorage.getItem("jwt"),
-      order:{
+      const jwt = localStorage.getItem("jwt")
+      const  order = {
         restaurantId:cart.cartItems[0].food?.restaurant.id,
         delivaryAddress:{
-          fullName:auth.user?.fullName,
-          streetAddress:value.streetAddress,
-          city:value.city,
-          state:value.state,
-          postalCode:value.pincode
+          fullName:auth.user?.email,
+          streetAddress:value.StreetAddress,
+          city:value.City,
+          state:value.State,
+          postalCode:value.Pincode
         }
       }
-    }
-    dispatch(createOrder(data))
+
+     console.log("values",value)
+ 
+    dispatch(createOrder({order,jwt}))
   }
+  
   useEffect(() =>{
-     dispatch(findCart(auth.jwt || jwt));
+     dispatch(getAllCartItems({cartId:cart.cart?.id,jwt:jwt}));
+     console.log("caart.jsx => find cart success",cart)
   },[])
 
   const [open, setOpen] = React.useState(false);
@@ -63,6 +66,17 @@ const Cart = () => {
     const createOrderUsingSelectedAddress= () => {
 
     }
+
+  
+    const calculateTotal = () =>{
+      var total = 0;
+      cart.cartItems.map((item) =>{
+       total += item.totalPrice;
+      })
+      return total;
+    }
+
+    const totalPrice = calculateTotal();
   return (
     <div>
       <main className='lg:flex  justify-between '>
@@ -77,7 +91,7 @@ const Cart = () => {
             <div className='space-y-3'>
                 <div className="flex justify-between text-gray-400">
                     <p>Item Total</p>
-                    <p>599</p>
+                    <p>{totalPrice}</p>
                 </div>
                 </div>
                 <div className='space-y-3'>
@@ -98,7 +112,7 @@ const Cart = () => {
                 <p>
                     Total Price
                 </p>
-                <p>3300</p>
+                <p>{totalPrice+10}</p>
             </div>
             </div>
         </section>
@@ -110,7 +124,7 @@ const Cart = () => {
                     </h1>
                     <div className='flex gap-5 flex-wrap justify-center'>
                      {
-                        [1,1,1,1,1].map((item) => <AddressCard item={item} showButton={true} handleSelectAddress={createOrderUsingSelectedAddress}/>)
+                        [1,1,1].map((item) => <AddressCard item={item} showButton={true} handleSelectAddress={createOrderUsingSelectedAddress}/>)
                      }
                      <Card className='flex gap-5 w-64 p-5'>
                     <AddLocationAltSharpIcon/>

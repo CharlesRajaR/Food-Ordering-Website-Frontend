@@ -12,12 +12,12 @@ export const registerUser = (reqData) => async(dispatch) => {
 
     try{
      const { data } = await axios.post(`${API_URL}/auth/signup`, reqData.userData)
-     if(data.jwt)localStorage.setItem("jwt", data.jwt);
+    //  if(data.jwt)localStorage.setItem("jwt", data.jwt);
     if(data.role === "ROLE_RESTAURANT_OWNER"){
-        reqData.navigate("admin/restaurant")
+        reqData.navigate("/account/login")
     }
     else{
-        reqData.navigate("/")
+        reqData.navigate("/account/login")
     }
     dispatch({type:REGISTER_SUCCESS, payload:data.jwt})
     console.log("register user successful")
@@ -39,7 +39,7 @@ export const loginUser = (reqData) => async(dispatch) => {
         reqData.navigate("admin/restaurant")
     }
     else{
-        reqData.navigate("/")
+        reqData.navigate("/my-profile")
     }
     dispatch({type:LOGIN_SUCCESS, payload:data.jwt})
     console.log("login successful")

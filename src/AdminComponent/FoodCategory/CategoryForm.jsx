@@ -18,7 +18,8 @@ const CategoryForm = () => {
         // }
         e.preventDefault()
         dispatch(createCategoryAction({reqData:formData,jwt:jwt}))
-        console.log("formdatadata",formData)
+        console.log("formdata",formData)
+        console.log("category created",restaurant)
         setFormData(initialValues)
 
 

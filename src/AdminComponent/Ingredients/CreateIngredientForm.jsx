@@ -1,19 +1,29 @@
-import { Button, Grid, TextField } from '@mui/material'
+import { Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from '@mui/material'
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { createIngredient } from '../../component/State/Ingredients/Action'
 
 const CreateIngredientForm = () => {
+  const { restaurant, ingredients } = useSelector(store => store)
     const initialValues = {
         name:"",
-        categoryId:""
+        categoryId:"",
+        restaurantId:restaurant.userRestaurants?.id
     }
     const [formData, setFormData] = useState(initialValues)
-    const handleSubmit =() =>{
-       
+    const dispatch = useDispatch()
+    const jwt = localStorage.getItem("jwt")
+    const handleSubmit =(e) =>{
+       e.preventDefault();
+       dispatch(createIngredient({data:formData, jwt:jwt}))
+       console.log("create ingredient form.jsx=> ingredient created",ingredients)
+        setFormData(initialValues)
     }
     const handleInputChange =(e) =>{
         const {name, value} = e.target
         setFormData({...formData,[name]:value})
         console.log("formdata",formData)
+        console.log("create ing form ingredients",ingredients)
     }
   return (
     <div>
@@ -31,11 +41,28 @@ const CreateIngredientForm = () => {
            </TextField>
            </Grid>
            <Grid item xs={12}>
-           <TextField fullWidth id='categoryId' name='categoryId' label='CategoryId' 
+           {/* <TextField fullWidth id='categoryId' name='categoryId' label='CategoryId' 
           variant='outlined' onChange={handleInputChange}
            value={formData.categoryId}>
             
-           </TextField>
+           </TextField> */}
+           <FormControl fullWidth>
+  <InputLabel id="demo-simple-select-label">category</InputLabel>
+  <Select
+    labelId="demo-simple-select-label"
+    id="demo-simple-select-label"
+    value={formData.categoryId}
+    label="Category"
+    onChange={handleInputChange}
+    name='categoryId'
+  >{
+    ingredients.category.map((item) =>{
+      return(
+    <MenuItem value={item.id}>{item.name}</MenuItem>)
+    })
+  }
+  </Select>
+</FormControl>
            </Grid>
            </Grid>
           <Button sx={{marginTop:"1rem"}} fullWidth variant='contained' type='submit'> Create New Ingredient</Button>

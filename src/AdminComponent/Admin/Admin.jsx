@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import AdminSideBar from '../AdminSideBAr/AdminSideBar'
 import { Route, Routes } from 'react-router-dom'
 import DashBoard from '../DashBoard/DashBoard'
@@ -9,9 +9,17 @@ import FoodCategory from '../FoodCategory/FoodCategory'
 import Ingredients from '../Ingredients/Ingredients'
 import Details from '../Details/Details'
 import CreateMenuForm from '../Menu/CreateMenuForm'
+import { useDispatch, useSelector } from 'react-redux'
+import { getRestaurantByUserId } from '../../component/State/Restaurant/Action'
 
 const Admin = () => {
 
+    const jwt = localStorage.getItem("jwt");
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getRestaurantByUserId(jwt))
+        console.log("Admin.jsx=> get restaurant by userid success")
+    },[])
     const handleClose = () =>{
 
     }

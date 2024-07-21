@@ -40,6 +40,7 @@ const handleItemAddToCart = (e) =>{
   }
   dispatch(addItemToCart(reqData));
   console.log("menu card Data",reqData)
+  setSelectedIngredients([])
 }
 const handleCheckBoxChange=(itemName)=>{
         if(selectedIngredients.includes(itemName)){
@@ -59,7 +60,7 @@ const handleCheckBoxChange=(itemName)=>{
         >
           <div className="lg:flex items-center justify-between">
             <div className="lg:flex items-center lg:gap-5 ">
-                <img src="images/hamburger.jpg" alt="" className='w-[7rem] h-[7rem] object-cover'/>
+                <img src={item.images[0]} alt="" className='w-[7rem] h-[7rem] object-cover'/>
                 <div className='space-y-1 lg:space-y-5 lg:max-w-2xl'>
                     <p className='font-semibold text-xl'>
                          {item.name}
@@ -97,7 +98,7 @@ const handleCheckBoxChange=(itemName)=>{
             <div className="">
              <div className="pt-5">
                 <Button type="submit" variant='contained' disabled={false}>
-                    {true?"Add to cart":"Out of stock"}
+                    {item.available?"Add to cart":"Out of stock"}
                 </Button>
              </div>
             </div>

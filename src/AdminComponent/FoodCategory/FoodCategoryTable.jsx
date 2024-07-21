@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, Card, CardHeader, IconButton, Modal, Paper, Table, TableBody, TableCell, TableContainer,
    TableHead, TableRow} from '@mui/material'
 import CreateIcon from '@mui/icons-material/Create'
 import CategoryForm from './CategoryForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { getRestaurantCategory } from '../../component/State/Restaurant/Action';
 
 const style = {
   position: 'absolute',
@@ -16,11 +18,19 @@ const style = {
   p: 4,
 };
 const FoodCategoryTable = () => {
-
-   const [open, setOpen] = React.useState(false);
+  const { restaurant } = useSelector(store => store)
+  const id = restaurant.userRestaurants?.id;
+  const jwt = localStorage.getItem("jwt")
+  const dispatch = useDispatch()
+  const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-    const order=[1,1,1,1,1]
+  const order=[1,1,1,1,1]
+  useEffect(() =>{
+    console.log("foodcategorytable.jsx => restaurant", restaurant)
+    dispatch(getRestaurantCategory({jwt:jwt,restaurantId:id}))
+    console.log("FoodCategoryTable.jsx => get restaurant category success",restaurant)
+    },[])
     // const navigate = useNavigate();
   return (
     <div>
@@ -39,13 +49,13 @@ const FoodCategoryTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {order.map((row, index) => (
+          {restaurant.category.map((item,index) => (
             <TableRow
               key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell align="left">1</TableCell>
-              <TableCell align="left">name</TableCell>
+              <TableCell align="left">{index+1}</TableCell>
+              <TableCell align="left">{item.name}</TableCell>
     
             </TableRow>
           ))}

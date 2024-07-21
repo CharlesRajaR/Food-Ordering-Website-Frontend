@@ -30,9 +30,13 @@ const menuItemReducer = (state = initialState, action) => {
             return{
                 ...state, loading:false, error: null, menuItem:action.payload
             }
+        // case actionTypes.DELETE_MENU_ITEM_SUCCESS:
+        //     return{
+        //         ...state, loading:false, error:null, menuItem:[...state.menuItem.filter((item) => item.id !== CompositionEvent.payload)]
+        //     }
         case actionTypes.DELETE_MENU_ITEM_SUCCESS:
             return{
-                ...state, loading:false, error:null, menuItem:[...state.menuItem.filter((item) => item.id !== CompositionEvent.payload)]
+                ...state, loading:false, error:null, menuItem:[...state.menuItem.filter((item) => item.id !== action.payload)]
             }
         case actionTypes.UPDATE_MENU_ITEM_AVILABILITY_SUCCESS:
             return{
@@ -52,7 +56,9 @@ const menuItemReducer = (state = initialState, action) => {
             }
 
         default:
-            return initialState;
+            return{
+                ...state
+            };
         
     }
 }
