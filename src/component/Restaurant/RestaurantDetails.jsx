@@ -75,13 +75,13 @@ const RestaurantDetails = () => {
         <div>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <img src="http://localhost:3000/images/banner.jpg" className='w-full h-[40vh] object-cover' alt="" />
+                <img src={restaurant?.restaurant.images[0]} className='w-full h-[40vh] object-cover' alt="" />
               </Grid>
               <Grid item xs={6} >
-                <img src="http://localhost:3000/images/banner.jpg" className='w-full h-[40vh] object-cover' alt="" />
+                <img src={restaurant?.restaurant.images[1]} className='w-full h-[40vh] object-cover' alt="" />
               </Grid>
               <Grid item xs={6}>
-                <img src="http://localhost:3000/images/banner.jpg" className='w-full h-[40vh] object-cover' alt="" />
+                <img src={restaurant?.restaurant.images[2]} className='w-full h-[40vh] object-cover' alt="" />
               </Grid>
             </Grid>
         </div>

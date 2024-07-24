@@ -11,8 +11,12 @@ export const createOrder = ({order,jwt}) => {
                     Authorization:`Bearer ${jwt}`
                 }
             })
-            dispatch({type:CREATE_ORDER_SUCCESS, payload:data})
-            console.log("order created successfully", data)
+            // dispatch({type:CREATE_ORDER_SUCCESS, payload:data})
+            if(data.payment_url){
+                window.location.href=data.payment_url
+                console.log("order created successfully", data)
+            }
+          
         }
         catch(error){
             dispatch({type:CREATE_ORDER_FAILURE, payload:error})
@@ -32,7 +36,7 @@ export const getUserOrder = (jwt) => {
                 }
             })
             dispatch({type:GET_USERS_ORDER_SUCCESS, payload:data})
-            console.log("data", data)
+            console.log("get user order success", data)
         }
         catch(error){
             dispatch({type:GET_USERS_ORDER_FAILURE, payload:error})

@@ -33,7 +33,7 @@ export const fetchRestaurantOrder = ({restaurantId, orderStatus, jwt}) =>{
                 }
             })
             dispatch({type:GET_RESTAURANT_ORDER_SUCCESS, payload:response.data})
-            console.log("data",response.data)
+            console.log("get restaurant order success",response.data)
         }
         catch(error){
             dispatch({type:GET_RESTAURANT_ORDER_FAILURE, payload:error})

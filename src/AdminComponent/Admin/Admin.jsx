@@ -9,7 +9,7 @@ import FoodCategory from '../FoodCategory/FoodCategory'
 import Ingredients from '../Ingredients/Ingredients'
 import Details from '../Details/Details'
 import CreateMenuForm from '../Menu/CreateMenuForm'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { getRestaurantByUserId } from '../../component/State/Restaurant/Action'
 
 const Admin = () => {
@@ -19,7 +19,7 @@ const Admin = () => {
     useEffect(() => {
         dispatch(getRestaurantByUserId(jwt))
         console.log("Admin.jsx=> get restaurant by userid success")
-    },[])
+    },[jwt])
     const handleClose = () =>{
 
     }
@@ -31,13 +31,13 @@ const Admin = () => {
         </div>
         <div className="md:w-[80%]">
             <Routes>
-                <Route path='/' element={<DashBoard/>} />
+                <Route path='/dashboard' element={<DashBoard/>} />
                 <Route path='/orders' element={<Order/>} />
                 <Route path='/menu' element={<Menu/>} />
                 <Route path='/event' element={<Events/>} />
                 <Route path='/category' element={<FoodCategory/>} />
                 <Route path='/ingredients' element={<Ingredients/>} />
-                <Route path='/details' element={<Details/>} />
+                <Route path='/' element={<Details/>} />
                 <Route path='/add-menu' element={<CreateMenuForm/>}/>
             </Routes>
         </div>

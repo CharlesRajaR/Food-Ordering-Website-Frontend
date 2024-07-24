@@ -40,8 +40,7 @@ const Cart = () => {
       const jwt = localStorage.getItem("jwt")
       const  order = {
         restaurantId:cart.cartItems[0].food?.restaurant.id,
-        delivaryAddress:{
-          fullName:auth.user?.email,
+        deliveryAddress:{
           streetAddress:value.StreetAddress,
           city:value.City,
           state:value.State,

@@ -26,7 +26,7 @@ const CreateMenuForm = () => {
     description:"",
     price:"",
     category:"",
-    restaurantId:"",
+    restaurantId:id,
     vegetarian:true,
     seasonal:false,
     ingredients:[],

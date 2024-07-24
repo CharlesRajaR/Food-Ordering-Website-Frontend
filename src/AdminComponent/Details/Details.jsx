@@ -2,11 +2,10 @@ import FacebookIcon from '@mui/icons-material/Facebook'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import { Button, Card, CardContent, CardHeader, Grid } from '@mui/material'
+import { Avatar, Button, Card, CardContent, CardHeader, Grid } from '@mui/material'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getRestaurantByUserId, updateRestaurantStatus } from '../../component/State/Restaurant/Action'
-import { RestaurantSharp } from '@mui/icons-material'
 
 const Details = () => {
   
@@ -15,7 +14,7 @@ const Details = () => {
   useEffect(() =>{
     console.log("useeffect details.jsx")
     dispatch(getRestaurantByUserId(jwt))
-  },[])
+  },[jwt])
   const { restaurant } = useSelector(store => store);
   console.log("Details.jsx => restaurant",restaurant)
   const handleRestaurantStatus =() =>{
@@ -33,7 +32,7 @@ const Details = () => {
         className='py-[1rem] px-[2rem]' color={restaurant.userRestaurants?.open?"primary":"error"}>{restaurant.userRestaurants?.open?"close":"open"}</Button>
       </div>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid item xs={7}>
           <Card>
             <CardHeader title={<span className='text-gray-300'>
               <CardContent>
@@ -57,7 +56,7 @@ const Details = () => {
                   <div className="flex">
                     <p className='w-48'>Status</p>
                     {restaurant.userRestaurants?.open?<button className='px-5 py-2 rounded-full md-green-400 text-gray-300'><span> - </span>open</button>:
-                    <button className='px-5 py-2 rounded-full md-red-400 text-gray-950'><span> - </span>close</button>}
+                    <button className='px-5 py-2 rounded-full md-red-400 text-gray-300'><span> - </span>close</button>}
                   </div>
                 </div>
               </CardContent>
@@ -66,6 +65,11 @@ const Details = () => {
             </CardHeader>
           </Card>
         </Grid>
+       <Grid item xs={5}>
+          <Card>
+            <Avatar sx={{display:"block", width:"90%", marginLeft:"auto", marginRight:"auto",height:"90%",padding:"7px"}} src={restaurant.userRestaurants?.images[0]}/>
+          </Card>
+      </Grid>
         <Grid item xs={12} lg={6}>
           <Card>
             <CardHeader title={<span className='text-gray-300'>
@@ -121,8 +125,8 @@ const Details = () => {
                       <span className='pr-5'>- </span>
                       <a href={restaurant.userRestaurants.contactInformation.instagram}><InstagramIcon sx={{fontSize:"3rem"}}/></a>
                       <a href={restaurant.userRestaurants.contactInformation.twitter}><TwitterIcon sx={{fontSize:"3rem"}}/></a>
-                      <a href=""><FacebookIcon sx={{fontSize:"3rem"}}/></a>
-                      <a href=""><LinkedInIcon sx={{fontSize:"3rem"}}/></a>
+                      <a href='www.facebook.com'><FacebookIcon sx={{fontSize:"3rem"}}/></a>
+                      <a href='www.linkedin.com'><LinkedInIcon sx={{fontSize:"3rem"}}/></a>
                     </div>
                   </div>
                 </div>

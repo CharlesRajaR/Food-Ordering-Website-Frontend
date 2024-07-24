@@ -25,6 +25,7 @@ const CategoryForm = () => {
 
     }
     const handleInputChange = (e) => {
+      console.log("e",e.target.value)
        e.preventDefault();
        const {name, value} = e.target;
        setFormData({...formData,[name]:value})

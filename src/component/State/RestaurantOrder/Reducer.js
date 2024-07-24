@@ -18,7 +18,7 @@ const restaurantOrderReducer = ( state=initialState, action) => {
             }
         case actionTypes.UPDATE_ORDER_STATUS_SUCCESS:
             return{
-                ...state,loading:false, error:null, restaurantOrder:state.restaurantOrderReducer.map((item) => item.id===action.payload.id?action.payload:item)
+                ...state,loading:false, error:null, restaurantOrder:state.restaurantOrder.map((item) => item.id===action.payload.id?action.payload:item)
             }
         case actionTypes.GET_RESTAURANT_ORDER_FAILURE:
         case actionTypes.UPDATE_ORDER_STATUS_FAILURE:

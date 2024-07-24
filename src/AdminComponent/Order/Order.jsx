@@ -3,9 +3,11 @@ import React, { useState } from 'react'
 import OrderTable from './OrderTable';
 
 const Order = () => {
-  const [filterValue, setFilterValue] = useState();
-  const handleFilter = (value) =>{
-    setFilterValue(value)
+  const [filterValue, setFilterValue] = useState("");
+  const handleChange = (e) =>{
+    console.log("e",e.target.value)
+    setFilterValue(e.target.value)
+    console.log("filterValue",filterValue)
   }
   const orderStatus = [{label:"Pending", value:"PENDING"},
     {label:"Completed", value:"COMPLETED"},
@@ -18,18 +20,18 @@ const Order = () => {
         OrderStatus
         </Typography>
         <FormControl>
-        <RadioGroup row name='Category' value={filterValue || "All"}>
+        <RadioGroup row name='Category' value={filterValue || "All"} onChange={handleChange}>
             {
               orderStatus.map((item) =>{
                 return(
-                <FormControlLabel key={item.label} value={filterValue}
-                 control={<Radio/>}  label={item.label}  sx={{color:"gray"}}/>
+                <FormControlLabel key={item.label} value={item.value} name={item.label}
+                 control={<Radio/>}  label={item.label} sx={{color:"gray"}}/>
               )})
             }
         </RadioGroup>
         </FormControl>
       </Card>
-      <OrderTable/>
+      <OrderTable filterValue={filterValue}/>
     </div>
   )
 }

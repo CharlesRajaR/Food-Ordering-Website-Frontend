@@ -19,19 +19,20 @@ export default function AdminSideBar({handleClose}) {
        if(item.title === 'Logout'){
         dispatch(logout())
         handleClose()
+        navigate('/')
        }
        else{
        navigate(`/admin/restaurant${item.path}`)
        }
     }
     const menu = [
-        {title:"Dashboard", icon:<DashboardIcon/>, path:'/'},
+        {title:"Dashboard", icon:<DashboardIcon/>, path:'/dashboard'},
         {title:'Orders', icon:<ShoppingBagIcon/>, path:'/orders'},
         {title:'Menu', icon:<ShopTwoIcon/>, path:'/menu'},
         {title:'Ingredients', icon:<FastfoodIcon/>, path:'/ingredients'},
         {title:'Category', icon:<CategoryIcon/>, path:'/category'},
         {title:'Event', icon:<EventIcon/>, path:'/event'},
-        {title:'Details', icon:<AdminPanelSettingsIcon/>, path:'/details'},
+        {title:'Details', icon:<AdminPanelSettingsIcon/>, path:'/'},
         {title:'Logout', icon:<LogoutIcon/>, path:'/'}
     ]
     const isSmallScreen = useMediaQuery("(max-width:1080px)")

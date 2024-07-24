@@ -18,10 +18,10 @@ const orderReducer = (state = initialState, action) =>{
             return{
                 ...state, loading:false,error:null,orders:action.payload
             }
-        case actionTypes.CREATE_ORDER_SUCCESS:
-            return{
-                ...state ,loading:false, error:null, orders:[action.payload, ...state.orders]
-            }
+        // case actionTypes.CREATE_ORDER_SUCCESS:
+        //     return{
+        //         ...state ,loading:false, error:null, orders:[action.payload, ...state.orders]
+        //     }
         case actionTypes.GET_USERS_ORDER_FAILURE:
             return{
                 ...state,loading:false, error:action.payload

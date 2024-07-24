@@ -38,7 +38,7 @@ const Navbar = () => {
          </IconButton>
         </div>
         <div>
-          {auth.user?<Avatar onClick={handleAvatarClick} sx={{bgcolor:"white", color:"pink.A400"}}>R</Avatar>:
+          {auth.user?<Avatar onClick={handleAvatarClick} sx={{bgcolor:"white", color:"pink.A400"}}>{auth.user?.email.charAt(0).toUpperCase()}</Avatar>:
           <IconButton onClick={() => navigate('/account/login')}>
             <Person/>
             </IconButton>
