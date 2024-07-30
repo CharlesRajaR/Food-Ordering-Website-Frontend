@@ -1,26 +1,34 @@
 import { Delete } from '@mui/icons-material'
 import { Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material'
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { deleteEventAction } from '../State/Restaurant/Action'
 
-const EventCard = () => {
+const EventCard = ({event}) => {
+  const dispatch = useDispatch()
+  const jwt = localStorage.getItem("jwt")
+  const deleteEvent = (eventId) => {
+    console.log(eventId)
+     dispatch(deleteEventAction({eventId,jwt}))
+  }
   return (
     <div>
       <Card className='w-[18rem]'>
-       <CardMedia image='http://localhost:3000/images/mug.webp' sx={{height:345}}/>
+       <CardMedia image={event?.image} sx={{height:345}}/>
        <CardContent>
         <Typography variant='h5'>
-         Indian Fast Food
+         {event?.name}
         </Typography>
        </CardContent>
         <Typography variant='body2'>
-         50%off on your first order 
+         50%offfer
         </Typography>
         <div className='p-2 space-y-2'>
-         <p>{"Mumbai"}</p>
-         <p className='text-sm text-blue-500 '>9.00AM Monday 1.1.2025</p>
-         <p className='text-sm text-green-500 '>9.00AM Monday 31.1.2025</p>
+         <p>{event?.location}</p>
+         <p className='text-sm text-blue-500 '>{event?.startedAt}</p>
+         <p className='text-sm text-green-500 '>{event?.endedAt}</p>
          {true && <CardContent>
-          <IconButton>
+          <IconButton onClick={()=>deleteEvent(event?.id)}>
             <Delete/>
             </IconButton></CardContent>}
         </div>

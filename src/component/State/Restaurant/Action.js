@@ -146,13 +146,13 @@ export const createEventAction = ({data, jwt, restaurantId}) =>{
         dispatch({type:CREATE_EVENTS_REQUEST})
 
         try{
-            const response = await api.post(`api/admin/events/restaurant/${restaurantId}`,{
+            const response = await api.post(`api/admin/event/${restaurantId}`, data, {
                 headers:{
                     Authorization:`Bearer ${jwt}`
                 }
             })
             dispatch({type:CREATE_EVENTS_SUCCESS,payload:response.data})
-            console.log(data);
+            console.log("restaurant event created",data);
         }
         catch(error){
             dispatch({type:CREATE_EVENTS_FAILURE,payload:error})
@@ -161,7 +161,7 @@ export const createEventAction = ({data, jwt, restaurantId}) =>{
     }
 }
 
-export const getAllEvents = ({jwt}) =>{
+export const getAllEvents = (jwt) =>{
     return async (dispatch) =>{
         dispatch({type:GET_ALL_EVENTS_REQUEST})
 
@@ -172,7 +172,7 @@ export const getAllEvents = ({jwt}) =>{
                 }
             })
             dispatch({type:GET_ALL_EVENTS_SUCCESS,payload:response.data})
-            console.log(response.data);
+            console.log("get all event success",response.data);
         }
         catch(error){
             dispatch({type:GET_ALL_EVENTS_FAILURE,payload:error})
@@ -186,13 +186,13 @@ export const deleteEventAction = ({eventId, jwt}) =>{
         dispatch({type:DELETE_EVENTS_REQUEST})
 
         try{
-            const response = await api.delete(`api/admin/events/${eventId}`,{
+            const response = await api.delete(`api/admin/event/delete/${eventId}`,{
                 headers:{
                     Authorization:`Bearer ${jwt}`
                 }
             })
-            dispatch({type:DELETE_EVENTS_SUCCESS,payload:response.data})
-            console.log(response.data);
+            dispatch({type:DELETE_EVENTS_SUCCESS,payload:eventId})
+            console.log("event deleted",eventId,response.data);
         }
         catch(error){
             dispatch({type:DELETE_EVENTS_FAILURE,payload:error})
@@ -212,7 +212,7 @@ export const getRestaurantsEvent = ({restaurantId, jwt}) =>{
                 }
             })
             dispatch({type:GET_RESTAURANT_EVENTS_SUCCESS,payload:response.data})
-            console.log(response.data);
+            console.log("get restaurant event success",response.data);
         }
         catch(error){
             dispatch({type:GET_RESTAURANT_EVENTS_FAILURE,payload:error})

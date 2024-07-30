@@ -1,64 +1,62 @@
-import { Button, TextField } from '@mui/material'
-import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers'
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
-import { AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs' 
-import dayjs from 'dayjs'
+import { Button, Grid, TextField } from '@mui/material'
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+// import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
+// import { DemoContainer } from '@mui/x-date-pickers/internals/demo' 
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { createEventAction } from '../../component/State/Restaurant/Action';
+
+
 
 const CreateEventForm = () => {
-  const initialValues = {
-    image:"",
-    location:"",
-    name:"",
-    startedAt:"",
-    endedAt:null
-  }
-  const [formData, setFormData] = useState(initialValues)
-  const handleSubmit = () =>{
 
-  }
-  const handleFormChange = (e) => {
-       setFormData({...formData, [e.target.name]:e.target.value})
-       console.log(e.target.value)
-  }
-  const handleDateChange = ({day,dateType}) =>{
-    const formatedDate = dayjs(day).format("MMMM DD YYYY HH:mm:A")
-    console.log("formatedDAte",formatedDate)
-    setFormData({...formData, [dateType]:formatedDate})
-  }
+  const initialValues ={
+  image:"",
+  name:"",
+  location:"",
+  startedAt:"",
+  endedAt:""
+}
+
+const [formValues, setFormValues] = useState(initialValues);
+const handleInputChange = (e) => {
+  setFormValues({...formValues, [e.target.name]:e.target.value})
+}
+const dispatch = useDispatch()
+const {  restaurant } = useSelector(store => store)
+const jwt = localStorage.getItem("jwt")
+const restaurantId = restaurant?.userRestaurants?.id
+const handleSubmit = (e) => {
+  e.preventDefault();
+  dispatch(createEventAction({data:formValues,jwt,restaurantId}))
+   console.log("values", formValues)
+   console.log("restaurant",restaurant)
+   setFormValues(initialValues)
+}
   return (
     <div>
-    
-       <form onSubmit={handleSubmit} className='py-3' action="">
-        <TextField fullWidth id='image_url' name='image' label='Image_URL' 
-          variant='outlined' onChange={handleFormChange}
-           value={formData.image}>
-            
-           </TextField>
-           <TextField fullWidth id='location' name='location' label='Location' 
-          variant='outlined' onChange={handleFormChange}
-           value={formData.location}>
-            
-           </TextField>
-           <TextField fullWidth id='name' name='name' label='Name' 
-          variant='outlined' onChange={handleFormChange}
-           value={formData.name}>
-            
-           </TextField>    
-           <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={['DateTimePicker']}>
-              <DateTimePicker label="StartedAt" onChange={(newValue) => handleDateChange(newValue,"startedAt")}/>
-              </DemoContainer>
-          </LocalizationProvider>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={['DateTimePicker']}>
-            <DateTimePicker label="EndedAt" onChange={(newValue) => handleDateChange(newValue,"endedAt")}  />
-          </DemoContainer>
-    </LocalizationProvider> 
-
-
-          <Button sx={{marginTop:"1rem"}} fullWidth variant='contained' type='submit'> Create Event</Button>
-        </form>
+      <form onSubmit={handleSubmit}>
+     
+    <Grid container spacing={2}>
+       <Grid item xs={12}>
+          <TextField fullWidth label='Image' name='image' value={formValues.image} onChange={handleInputChange}/>
+       </Grid>
+       <Grid item xs={12}>
+          <TextField fullWidth label='Location' name='location' value={formValues.location} onChange={handleInputChange}/>
+       </Grid>
+       <Grid item xs={12}>
+          <TextField fullWidth label='Name' name='name' value={formValues.name} onChange={handleInputChange}/>
+       </Grid>
+       <Grid item xs={12}>
+       <TextField fullWidth label='Started Date and Time' name='startedAt' value={formValues.startedAt} onChange={handleInputChange}/>
+       </Grid>
+       <Grid item xs={12}>
+       <TextField fullWidth label='Ended Date and Time' name='endedAt' value={formValues.endedAt} onChange={handleInputChange}/>
+       </Grid>
+       <Button contained type='submit'>Create Event</Button>
+    </Grid>
+      
+      </form>
     </div>
   )
 }

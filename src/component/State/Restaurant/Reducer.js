@@ -76,7 +76,8 @@ const restaurantReducer = (state = initialState, action) =>{
         }
     case actionTypes.DELETE_EVENTS_SUCCESS:
         return{
-            ...state, error:null, loading:false, events:state.events.filter((item) => item.id !== action.payload)
+            ...state, error:null, loading:false, events:state.events.filter((item) => item.id !== action.payload),
+            restaurantEvents:state.restaurantEvents.filter((item) => item.id !== action.payload)
         }
     case actionTypes.CREATE_CATEGORY_SUCCESS:
         return{
