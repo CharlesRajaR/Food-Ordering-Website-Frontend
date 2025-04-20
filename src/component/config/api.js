@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const API_URL = "http://localhost:8080"
+export const API_URL = "https://artistic-orel-rcraja-735c7b5f.koyeb.app/"
 
 export const api = axios.create({
     baseURL:API_URL,
@@ -8,3 +8,5 @@ export const api = axios.create({
         "Content-Type":"application/json",
     }
 })
+
+
