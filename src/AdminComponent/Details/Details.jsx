@@ -32,97 +32,82 @@ const Details = () => {
         className='py-[1rem] px-[2rem]' color={restaurant.userRestaurants?.open?"primary":"error"}>{restaurant.userRestaurants?.open?"close":"open"}</Button>
       </div>
       <Grid container spacing={2}>
-        <Grid item xs={7}>
-          <Card>
-            <CardHeader title={<span className='text-gray-300'>
-              <CardContent>
-                <div className="space-y-4 text-gray-200">
-                  <div className="flex">
-                    <p className='w-48'>Owner</p>
-                    <p className='text-gray-400'><span>- </span>{restaurant.userRestaurants?.owner?.email}</p>
+        <Grid item xs={12}>
+            <div className="w-full h-auto flex justify-center items-center">
+                <Avatar sx={{width:"100%", aspectRatio:"1/1", borderRadius:"100%" ,height:"100%"}} 
+                src={restaurant.userRestaurants?.images[0]}/>
+            </div>
+        </Grid>
+
+        <Grid item xs={12}>
+                <div className="flex flex-col gap-5 font-bold text-2xl text-gray-200 px-10 py-5">
+                  <div className="flex gap-10">
+                    <p className=''>Owner</p>
+                    <p className='text-gray-400'>{restaurant.userRestaurants?.owner?.email}</p>
                   </div>
-                  <div className="flex">
-                    <p className='w-48'>Restaurant Name</p>
-                    <p className='text-gray-400'><span>- </span>{restaurant.userRestaurants?.name}</p>
+                  <div className="flex gap-10">
+                    <p className=''>Restaurant Name</p>
+                    <p className='text-gray-400'>{restaurant.userRestaurants?.name}</p>
                   </div>
-                  <div className="flex">
-                    <p className='w-48'>Cuisine Type</p>
-                    <p className='text-gray-400'><span>- </span>{restaurant.userRestaurants?.cuisineType}</p>
+                  <div className="flex gap-10">
+                    <p className=''>Cuisine Type</p>
+                    <p className='text-gray-400'>{restaurant.userRestaurants?.cuisineType}</p>
                   </div>
-                  <div className="flex">
-                    <p className='w-48'>Opening Hours</p>
-                    <p className='text-gray-400'><span>- </span>opening hours</p>
+                  <div className="flex gap-10">
+                    <p className=''>Opening Hours</p>
+                    <p className='text-gray-400'>opening hours</p>
                   </div>
-                  <div className="flex">
-                    <p className='w-48'>Status</p>
-                    {restaurant.userRestaurants?.open?<button className='px-5 py-2 rounded-full md-green-400 text-gray-300'><span> - </span>open</button>:
-                    <button className='px-5 py-2 rounded-full md-red-400 text-gray-300'><span> - </span>close</button>}
+                  <div className="flex gap-10">
+                    <p className=''>Status</p>
+                    {restaurant.userRestaurants?.open?
+                    <button className='px-5 py-2 rounded-full text-green-700 font-bold'>open</button>:
+                    <button className='px-5 py-2 rounded-full text-red-700 font-bold'>close</button>}
                   </div>
                 </div>
-              </CardContent>
-            </span>}>
-
-            </CardHeader>
-          </Card>
+              
         </Grid>
-       <Grid item xs={5}>
-          <Card>
-            <Avatar sx={{display:"block", width:"90%", marginLeft:"auto", marginRight:"auto",height:"90%",padding:"7px"}} src={restaurant.userRestaurants?.images[0]}/>
-          </Card>
-      </Grid>
-        <Grid item xs={12} lg={6}>
-          <Card>
-            <CardHeader title={<span className='text-gray-300'>
-              <CardContent>
-                <div className="space-y-4 text-gray-200">
-                  <div className="flex">
-                    <p className='w-48'>Contact</p>
-                    <p className='text-gray-400'><span>- </span> RCR Food</p>
+       
+        <Grid item xs={12}>
+                <div className="flex flex-col gap-5 font-bold text-2xl px-10 py-5 text-gray-200">
+                  <div className="flex gap-10">
+                    <p className=''>Contact</p>
+                    <p className='text-gray-400'>RCR Food</p>
                   </div>
-                  <div className="flex">
-                    <p className='w-48'>Address</p>
-                    <p className='text-gray-400'><span>- </span> RajaCR Restaurant</p>
+                  <div className="flex gap-10">
+                    <p className=''>Address</p>
+                    <p className='text-gray-400'> RajaCR Restaurant</p>
                   </div>
-                  <div className="flex">
-                    <p className='w-48'>Country</p>
-                    <p className='text-gray-400'><span>- </span>Vegetarian, Non-veg, Seasonal</p>
+                  <div className="flex gap-10">
+                    <p className=''>Country</p>
+                    <p className='text-gray-400'>Vegetarian, Non-veg, Seasonal</p>
                   </div>
-                  <div className="flex">
-                    <p className='w-48'>City</p>
-                    <p className='text-gray-400'><span>- </span>9Am</p>
+                  <div className="flex gap-10">
+                    <p className=''>City</p>
+                    <p className='text-gray-400'>9Am</p>
                   </div>
-                  <div className="flex">
-                    <p className='w-48'>Postal code</p>
-                    <p className='text-gray-400'><span>- </span> RajaCR Restaurant</p>
+                  <div className="flex gap-10">
+                    <p className=''>Postal code</p>
+                    <p className='text-gray-400'>RajaCR Restaurant</p>
                   </div>
-                  <div className="flex">
-                    <p className='w-48'>Street Address</p>
-                    <p className='text-gray-400'><span>- </span> RajaCR Restaurant</p>
+                  <div className="flex gap-10">
+                    <p className=''>Street Address</p>
+                    <p className='text-gray-400'>RajaCR Restaurant</p>
                   </div>
                 </div>
-              </CardContent>
-            </span>}>
-
-            </CardHeader>
-          </Card>
         </Grid>
-        <Grid item xs={12} lg={6}>
-          <Card>
-            <CardHeader title={<span className='text-gray-300'>
-              <CardContent>
-                <div className="space-y-4 text-gray-200">
-                  <div className="flex">
-                    <p className='w-48'>Email</p>
-                    <p className='text-gray-400'><span>- </span>{restaurant.userRestaurants?.contactInformation?.email}</p>
+        <Grid item xs={12}>
+                <div className="flex flex-col text-2xl font-bold px-10 py-5 gap-5 text-gray-200">
+                  <div className="flex gap-10">
+                    <p className=''>Email</p>
+                    <p className='text-gray-400'>{restaurant.userRestaurants?.contactInformation?.email}</p>
                   </div>
-                  <div className="flex">
-                    <p className='w-48'>Mobile</p>
-                    <p className='text-gray-400'><span>- </span>{restaurant.userRestaurants?.contactInformation?.mobile}</p>
+                  <div className="flex gap-10">
+                    <p className=''>Mobile</p>
+                    <p className='text-gray-400'>{restaurant.userRestaurants?.contactInformation?.mobile}</p>
                   </div>
-                  <div className="flex">
-                    <p className='w-48'>Social</p>
+                  <div className="flex gap-10">
+                    <p className=''>Social</p>
                     <div className='flex text-gray-400 items-center pb-3 pl-3'>
-                      <span className='pr-5'>- </span>
                       <a href={restaurant.userRestaurants.contactInformation.instagram}><InstagramIcon sx={{fontSize:"3rem"}}/></a>
                       <a href={restaurant.userRestaurants.contactInformation.twitter}><TwitterIcon sx={{fontSize:"3rem"}}/></a>
                       <a href='www.facebook.com'><FacebookIcon sx={{fontSize:"3rem"}}/></a>
@@ -130,11 +115,6 @@ const Details = () => {
                     </div>
                   </div>
                 </div>
-              </CardContent>
-            </span>}>
-             
-            </CardHeader>
-          </Card>
         </Grid>
       </Grid>
     </div>

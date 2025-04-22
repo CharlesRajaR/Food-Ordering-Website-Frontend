@@ -191,7 +191,11 @@ const CreateRestaurantForm = () => {
            </TextField>
           </Grid>
          </Grid>
-         <Button variant='contained' color='primary' type='submit'>Create Restaurant</Button>
+         <div className="flex px-3 py-3 mt-3 gap-10">
+             <Button variant='contained' color='primary' type='submit'>Create Restaurant</Button>
+             <Button variant='contained' color='red' onClick={()=> formik.resetForm()}>Clear Data</Button>
+         </div>
+         
       </form>
       </div>
     </div>
