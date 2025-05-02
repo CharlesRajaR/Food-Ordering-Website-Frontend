@@ -6,13 +6,15 @@ import {Provider} from 'react-redux'
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom'
 import { store } from './component/State/Store';
+import Details from './AdminComponent/Details/Details';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
     <Provider store={store}>
-     <App/>
+        <App/>
+        {/* <Details/> */}
     </Provider>
     </BrowserRouter>
   </React.StrictMode>

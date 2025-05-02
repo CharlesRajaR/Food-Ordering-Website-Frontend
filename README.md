@@ -1,3 +1,103 @@
+# 🍽️ RCR-FoodEase – Empowering Local Restaurants with Direct Orders
+
+## 🚀 Overview
+
+**RCR-FoodEase** is a simple, commission-free online food ordering platform designed for small restaurants. Unlike major platforms like Swiggy and Zomato, FoodEase gives restaurant owners full control over their profits by removing high commission charges and offering tools to build a direct relationship with their customers.
+
+---
+
+## 💼 The Problem with Existing Platforms
+
+### Platforms like Swiggy & Zomato:
+- Charge **15%–30% commission** on every order
+- Impose **packaging, cancellation, and penalty fees**
+- Restrict access to **customer data**, limiting loyalty and feedback
+- Create **dependency** on third-party delivery agents and algorithms
+
+> 💡 For a restaurant making ₹50,000 in monthly sales, up to ₹10,000 goes to platform commissions—often more than half of their net profit!
+
+---
+
+## ❗ Real-World Challenge
+
+Many small restaurant owners struggle to stay profitable on food delivery apps. High commissions and hidden charges leave little to no margin on each order.
+
+---
+
+## ✅ Our Solution: Direct Tipping for Restaurants
+
+### 🎯 Feature: “Tip the Chef” – 100% to the Restaurant
+
+After every order, customers are prompted:
+> _“Enjoyed your meal? Leave a tip for the kitchen staff 🍲”_
+
+- 💵 Customers can tip a fixed amount (₹10/₹20/₹50) or enter a custom amount
+- 🧾 100% of the tip goes **directly to the restaurant**—not to the platform
+- ❤️ Encourages appreciation for chefs and staff
+- 🔁 Boosts restaurant revenue **without raising prices**
+
+---
+
+## 🛠️ How I Built It
+
+- Developed a **React + Tailwind** frontend with a clean and mobile-friendly UI
+- Backend powered by **Spring Boot** with secure **JWT-based authentication**
+- Integrated a tipping module:
+  - Added a tip input on the order confirmation page
+  - Extended backend order API to store and process tips
+  - Tips are displayed on restaurant dashboards
+- MySQL stores all order and tip data for transparent reporting
+
+---
+
+## 📊 Key Features
+
+| Feature               | Description                                      |
+|----------------------|--------------------------------------------------|
+| 🍽️ Direct Orders      | No commissions or third-party interference       |
+| 💸 Tip the Chef        | Optional customer tip sent directly to restaurant |
+| 📦 Simple Dashboard    | Restaurants track orders, revenue, and tips     |
+| 🔐 Secure Auth         | JWT-based user and admin login                  |
+| 📱 Mobile-Responsive   | Works seamlessly across devices                 |
+
+<!-- ---
+
+## 📷 Screenshots (Add Yours Here)
+
+![Order Confirmation](./screenshots/tip-feature.png)
+*“Tip the Chef” option on the order confirmation screen*
+
+--- -->
+
+## 🧠 Why It Matters
+
+> This project solves a **real and urgent problem** in the food delivery ecosystem by empowering small restaurants to earn more and build lasting customer relationships—without relying on costly third-party platforms.
+
+---
+
+## 📌 Takeaways
+
+- 💰 **Tipping is a powerful revenue stream** for restaurants
+- ⚙️ Solving just one pain point can deliver real value
+- 🧑‍🍳 We built a feature that platforms like Zomato have only recently started offering
+- 🌱 Supports local food businesses and ethical tech practices
+
+---
+
+## 📬 Contact
+
+**Developer:** Charles Raja R 
+📧 rcharlesraja2003@gmail.com  
+📍 Chidambarapuram, Kalakad, Tirunelveli, TamilNadu 
+📱 +91 63810 42076  
+
+---
+
+## ⭐ Like This Project?
+
+Star this repo and share it with others who want to support small businesses and ethical food delivery solutions!
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
