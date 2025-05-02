@@ -6,6 +6,7 @@ import React, { useState } from 'react'
 import { uploadImageToCloudinary } from '../util/uploadImageToCloudinary';
 import { useDispatch } from 'react-redux';
 import { createRestaurant } from '../../component/State/Restaurant/Action';
+import Grid2 from '@mui/material/Unstable_Grid2';
 
 const CreateRestaurantForm = () => {
   const dispatch = useDispatch()
@@ -73,8 +74,8 @@ const CreateRestaurantForm = () => {
       <div className='lg:max-w-4xl py-3'>
       <h1 className='font-bold text-2xl text-center py-2'>Add New Restaurant</h1>
       <form onSubmit={formik.handleSubmit}>
-         <Grid container spacing={2}>
-          <Grid item xs={12} className='flex flex-wrap gap-5'>
+         <Grid2 container spacing={2}>
+          <Grid2  item md={12} className='flex flex-wrap gap-5'>
            <input type='file' accept='image/*' id='fileInput' style={{display:"none"}} 
            onChange={handleImageChange} />
            <label htmlFor='fileInput' className='relative'>
@@ -98,102 +99,108 @@ const CreateRestaurantForm = () => {
             </div>)
             }
            </div>
-          </Grid>
-          <Grid item xs={12}>
+          </Grid2>
+          <Grid2 item md={12}>
            <TextField fullWidth id='name' name='name' label='Name' variant='outlined' onChange={formik.handleChange}
            value={formik.values.name}>
             
            </TextField>
-          </Grid>
-          <Grid item xs={12}>
+          </Grid2>
+          <Grid2 item md={12}>
           <TextField fullWidth id='description' name='description' label='Description' 
           variant='outlined' onChange={formik.handleChange}
            value={formik.values.description}>
             
            </TextField>
-          </Grid>
-          <Grid item xs={12} lg={6}>
+          </Grid2>
+          <Grid2  size={{xs:12, md:6}}>
           <TextField fullWidth id='cuisineType' name='cuisineType' label='CuisineType' 
           variant='outlined' onChange={formik.handleChange}
            value={formik.values.cuisineType}>
             
            </TextField>
-          </Grid>
-          <Grid item xs={12} lg={6}>
+          </Grid2>
+          <Grid2 size={{xs:12, md:6}}>
           <TextField fullWidth id='streetAddress' name='streetAddress' label='StreetAddress' 
           variant='outlined' onChange={formik.handleChange}
            value={formik.values.streetAddress}>
             
            </TextField>
-          </Grid>
-          <Grid item xs={12}>
+          </Grid2>
+          <Grid2 size={12}>
           <TextField fullWidth id='openingHours' name='openingHours' label='OpeningHours' 
           variant='outlined' onChange={formik.handleChange}
            value={formik.values.openingHours}>
             
            </TextField>
-          </Grid>
+          </Grid2>
          
-          <Grid item xs={12}>
+          <Grid2 size={12}>
           <TextField fullWidth id='city' name='city' label='City' 
           variant='outlined' onChange={formik.handleChange}
            value={formik.values.city}>
             
            </TextField>
-          </Grid>
-          <Grid item xs={12} lg={4}>
+          </Grid2>
+          <Grid2 size={{xs:12, md:4}}>
           <TextField fullWidth id='stateProvince' name='stateProvince' label='StateProvince' 
           variant='outlined' onChange={formik.handleChange}
            value={formik.values.stateProvince}>
             
            </TextField>
-          </Grid>
-          <Grid item xs={12} lg={4}>
+          </Grid2>
+          <Grid2 size={{xs:12, lg:4}}>
           <TextField fullWidth id='postalCode' name='postalCode' label='PostalCode' 
           variant='outlined' onChange={formik.handleChange}
            value={formik.values.postalCode}>
             
            </TextField>
-          </Grid>
-          <Grid item xs={12} lg={4}>
+          </Grid2>
+          <Grid2 size={{xs:12, lg:4}}>
           <TextField fullWidth id='country' name='country' label='Country' 
           variant='outlined' onChange={formik.handleChange}
            value={formik.values.country}>
             
            </TextField>
-          </Grid>
-          <Grid item xs={12} lg={6}>
+          </Grid2>
+          <Grid2 size={{xs:12, lg:6}}>
           <TextField fullWidth id='email' name='email' label='Email' 
           variant='outlined' onChange={formik.handleChange}
            value={formik.values.email}>
             
            </TextField>
-          </Grid>
-          <Grid item xs={12} lg={6}>
+          </Grid2>
+          <Grid2 size={{xs:12, lg:4}}>
           <TextField fullWidth id='mobile' name='mobile' label='mobile' 
           variant='outlined' onChange={formik.handleChange}
            value={formik.values.mobile}>
             
            </TextField>
-          </Grid>
-          <Grid item xs={12} lg={6}>
+          </Grid2>
+          <Grid2 size={{xs:12, lg:6}}>
           <TextField fullWidth id='instragram' name='instragram' label='Instragram' 
           variant='outlined' onChange={formik.handleChange}
            value={formik.values.instragram}>
             
            </TextField>
-          </Grid>
-          <Grid item xs={12} lg={6}>
+          </Grid2>
+          <Grid2 size={{xs:12, lg:6}}>
           <TextField fullWidth id='twitter' name='twitter' label='twitter' 
           variant='outlined' onChange={formik.handleChange}
            value={formik.values.twitter}>
             
            </TextField>
-          </Grid>
-         </Grid>
+          </Grid2>
+         </Grid2>
          <div className="flex px-3 py-3 mt-3 gap-10">
-             <Button variant='contained' color='primary' type='submit'>Create Restaurant</Button>
-             <Button variant='contained' color='red' onClick={()=> formik.resetForm()}>Clear Data</Button>
+             <div>
+              <Button variant='contained' color='primary' 
+             type='submit'>Create Restaurant</Button>
+             </div>
+              <div>   
+             <Button variant='contained' color='primary' 
+             onClick={()=> formik.resetForm()}>Clear Data</Button>
+             </div>
          </div>
          
       </form>

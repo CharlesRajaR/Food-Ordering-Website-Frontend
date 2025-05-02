@@ -2,10 +2,11 @@ import FacebookIcon from '@mui/icons-material/Facebook'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import { Avatar, Button, Card, CardContent, CardHeader, Grid } from '@mui/material'
+import { Avatar, Button, Card, CardContent, CardHeader,  Grid } from '@mui/material'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getRestaurantByUserId, updateRestaurantStatus } from '../../component/State/Restaurant/Action'
+import Grid2 from '@mui/material/Unstable_Grid2'
 
 const Details = () => {
   
@@ -29,17 +30,19 @@ const Details = () => {
           {restaurant.userRestaurants?.name}
         </h1>
         <Button size='large' variant='contained' onClick={handleRestaurantStatus}
-        className='py-[1rem] px-[2rem]' color={restaurant.userRestaurants?.open?"primary":"error"}>{restaurant.userRestaurants?.open?"close":"open"}</Button>
+        className='py-[1rem] px-[2rem]'
+         color={restaurant.userRestaurants?.open?"primary":"error"}>
+          {restaurant.userRestaurants?.open?"click to close":"click to open"}</Button>
       </div>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
+      <Grid2 container spacing={2}>
+        <Grid2 item xs={12}>
             <div className="w-full h-auto flex justify-center items-center">
-                <Avatar sx={{width:"100%", aspectRatio:"1/1", borderRadius:"100%" ,height:"100%"}} 
+                <Avatar sx={{width:"50%", aspectRatio:"1/1", borderRadius:"100%" ,height:"50%"}} 
                 src={restaurant.userRestaurants?.images[0]}/>
             </div>
-        </Grid>
+        </Grid2>
 
-        <Grid item xs={12}>
+        <Grid2 item xs={12}>
                 <div className="flex flex-col gap-5 font-bold text-2xl text-gray-200 px-10 py-5">
                   <div className="flex gap-10">
                     <p className=''>Owner</p>
@@ -60,42 +63,14 @@ const Details = () => {
                   <div className="flex gap-10">
                     <p className=''>Status</p>
                     {restaurant.userRestaurants?.open?
-                    <button className='px-5 py-2 rounded-full text-green-700 font-bold'>open</button>:
-                    <button className='px-5 py-2 rounded-full text-red-700 font-bold'>close</button>}
+                    <button className='px-5 py-2 rounded-full text-green-700 font-bold'>opened</button>:
+                    <button className='px-5 py-2 rounded-full text-red-700 font-bold'>closed</button>}
                   </div>
                 </div>
               
-        </Grid>
-       
-        <Grid item xs={12}>
-                <div className="flex flex-col gap-5 font-bold text-2xl px-10 py-5 text-gray-200">
-                  <div className="flex gap-10">
-                    <p className=''>Contact</p>
-                    <p className='text-gray-400'>RCR Food</p>
-                  </div>
-                  <div className="flex gap-10">
-                    <p className=''>Address</p>
-                    <p className='text-gray-400'> RajaCR Restaurant</p>
-                  </div>
-                  <div className="flex gap-10">
-                    <p className=''>Country</p>
-                    <p className='text-gray-400'>Vegetarian, Non-veg, Seasonal</p>
-                  </div>
-                  <div className="flex gap-10">
-                    <p className=''>City</p>
-                    <p className='text-gray-400'>9Am</p>
-                  </div>
-                  <div className="flex gap-10">
-                    <p className=''>Postal code</p>
-                    <p className='text-gray-400'>RajaCR Restaurant</p>
-                  </div>
-                  <div className="flex gap-10">
-                    <p className=''>Street Address</p>
-                    <p className='text-gray-400'>RajaCR Restaurant</p>
-                  </div>
-                </div>
-        </Grid>
-        <Grid item xs={12}>
+        </Grid2>
+        <div className="w-full h-[1px] border-white border-y-2"></div>
+        <Grid2 item xs={12}>
                 <div className="flex flex-col text-2xl font-bold px-10 py-5 gap-5 text-gray-200">
                   <div className="flex gap-10">
                     <p className=''>Email</p>
@@ -115,8 +90,8 @@ const Details = () => {
                     </div>
                   </div>
                 </div>
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
     </div>
   )
 }

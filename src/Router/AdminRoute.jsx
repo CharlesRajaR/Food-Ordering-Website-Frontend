@@ -16,7 +16,9 @@ export default function AdminRoute() {
     const { restaurant } = useSelector(store => store)
   return (
     <Routes>
-        <Route path='/*' element={!restaurant.userRestaurants?<CreateRestaurantForm/>:<Admin/>}/>
+        <Route path='/*' element={!restaurant?.userRestaurants?
+        <CreateRestaurantForm/> :
+        <Admin/>}/>
     </Routes>
   )
 }

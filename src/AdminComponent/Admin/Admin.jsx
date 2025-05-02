@@ -38,6 +38,7 @@ const Admin = () => {
                 <Route path='/category' element={<FoodCategory/>} />
                 <Route path='/ingredients' element={<Ingredients/>} />
                 <Route path='/' element={<Details/>} />
+                
                 <Route path='/add-menu' element={<CreateMenuForm/>}/>
             </Routes>
         </div>
